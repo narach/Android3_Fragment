@@ -6,10 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import info.igorek.carmanagerfragment.R
+import info.igorek.carmanagerfragment.adapters.CarListAdapter
+import info.igorek.carmanagerfragment.databinding.FragmentListBinding
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(R.layout.fragment_list) {
+
+    private var _binding : FragmentListBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var carListAdapter: CarListAdapter
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }
