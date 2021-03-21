@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import info.igorek.carmanagerfragment.R
 import info.igorek.carmanagerfragment.adapters.CarListAdapter
 import info.igorek.carmanagerfragment.databinding.FragmentListBinding
@@ -33,6 +34,9 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         super.onViewCreated(view, savedInstanceState)
         var carList = InitHelper.initCarList(fContext);
         carListAdapter = CarListAdapter(carList)
+
+        binding.recyclerViewList.adapter = carListAdapter
+        binding.recyclerViewList.layoutManager = LinearLayoutManager(fContext)
     }
 
     override fun onDestroyView() {
