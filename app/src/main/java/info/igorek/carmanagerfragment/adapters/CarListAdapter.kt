@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import info.igorek.carmanagerfragment.data.Car
 import info.igorek.carmanagerfragment.databinding.ItemCarBinding
+import info.igorek.carmanagerfragment.interfaces.CommunicationInterface
 
-class CarListAdapter(private var carsList : List<Car>) : RecyclerView.Adapter<CarListAdapter.CarViewHolder>() {
+class CarListAdapter(private var carsList : List<Car>, private val navigation: CommunicationInterface) : RecyclerView.Adapter<CarListAdapter.CarViewHolder>() {
     inner class CarViewHolder(private val itemCarBinding: ItemCarBinding) : RecyclerView.ViewHolder(itemCarBinding.root) {
         fun bind (car : Car) {
             itemCarBinding.imageViewPhoto.setImageDrawable(car.image)
@@ -25,6 +26,9 @@ class CarListAdapter(private var carsList : List<Car>) : RecyclerView.Adapter<Ca
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         holder.bind(carsList[position])
+        holder.itemView.setOnClickListener {
+            navigation.updateCar(position)
+        }
     }
 
     override fun getItemCount(): Int {

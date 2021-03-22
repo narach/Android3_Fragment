@@ -13,9 +13,10 @@ import info.igorek.carmanagerfragment.R
 import info.igorek.carmanagerfragment.adapters.CarListAdapter
 import info.igorek.carmanagerfragment.data.Car
 import info.igorek.carmanagerfragment.databinding.FragmentListBinding
+import info.igorek.carmanagerfragment.interfaces.CommunicationInterface
 import info.igorek.carmanagerfragment.viewmodels.CarListViewModel
 
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment (val navigation: CommunicationInterface) : Fragment(R.layout.fragment_list) {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -39,7 +40,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        carListAdapter = CarListAdapter(carListViewModel.carListLiveData.value!!)
+        carListAdapter = CarListAdapter(carListViewModel.carListLiveData.value!!, navigation)
 
         binding.recyclerViewList.adapter = carListAdapter
         binding.recyclerViewList.layoutManager = LinearLayoutManager(fContext)
