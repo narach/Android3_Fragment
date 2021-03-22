@@ -3,12 +3,15 @@ package info.igorek.carmanagerfragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import info.igorek.carmanagerfragment.databinding.ActivityMainBinding
 import info.igorek.carmanagerfragment.databinding.ItemCarBinding
 import info.igorek.carmanagerfragment.fragments.AddFragment
 import info.igorek.carmanagerfragment.fragments.EditFragment
 import info.igorek.carmanagerfragment.fragments.ListFragment
+import info.igorek.carmanagerfragment.helpers.InitHelper
+import info.igorek.carmanagerfragment.viewmodels.CarListViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,10 +20,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fragmentCarEdit: EditFragment
     private lateinit var fragmentCarAdd: AddFragment
 
+    private val carListViewModel: CarListViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        carListViewModel.loadCars(InitHelper.initCarList(this))
 
         fragmentCarList = ListFragment()
         fragmentCarEdit = EditFragment()
