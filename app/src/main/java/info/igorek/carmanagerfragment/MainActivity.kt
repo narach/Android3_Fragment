@@ -33,14 +33,13 @@ class MainActivity : AppCompatActivity(), CommunicationInterface {
 
         fragmentCarList = ListFragment(this)
         fragmentCarEdit = EditFragment(this)
-        fragmentCarAdd = AddFragment()
+        fragmentCarAdd = AddFragment(this)
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menuItemList -> setCurrentFragment(fragmentCarList)
                 R.id.menuItemEdit -> setCurrentFragment(fragmentCarEdit)
-//                R.id.menuItemAdd -> setCurrentFragment(fragmentCarAdd)
-                R.id.menuItemAdd -> Toast.makeText(this, "No fragment yet", Toast.LENGTH_SHORT)
+                R.id.menuItemAdd -> setCurrentFragment(fragmentCarAdd)
 
             }
             true

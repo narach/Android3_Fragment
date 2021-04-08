@@ -57,6 +57,7 @@ class EditFragment (private val navigation: CommunicationInterface): Fragment(R.
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, CODE)
+
             }
 
 
