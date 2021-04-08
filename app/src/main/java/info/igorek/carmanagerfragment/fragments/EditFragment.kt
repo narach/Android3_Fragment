@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import info.igorek.carmanagerfragment.R
 import info.igorek.carmanagerfragment.adapters.CarListAdapter
 import info.igorek.carmanagerfragment.data.Car
@@ -41,10 +42,19 @@ class EditFragment (private val navigation: CommunicationInterface): Fragment(R.
         selectedCar = carListViewModel.getCarAtPosition(carListViewModel.selectedIndex.value!!)
 
         with(binding) {
-            editTextBrand.setText(selectedCar.brand)
-            editTextModel.setText(selectedCar.model)
-            editTextYear.setText(selectedCar.year)
-            imageViewCarEdit.setImageDrawable(selectedCar.image)
+            carListViewModel.selectedIndex.observe(viewLifecycleOwner, Observer { carIndex ->
+                val car = carListViewModel.getCarAtPosition(carIndex)
+                editTextBrand.setText(car.brand)
+                editTextModel.setText(car.model)
+                editTextYear.setText(car.year)
+                imageViewCarEdit.setImageDrawable(car.image)
+            })
+//            carListViewModel.selectedItem.observe(viewLifecycleOwner, Observer { car ->
+//                editTextBrand.setText(car.brand)
+//                editTextModel.setText(car.model)
+//                editTextYear.setText(car.year)
+//                imageViewCarEdit.setImageDrawable(car.image)
+//            })
 
             buttonSave.setOnClickListener {
                 selectedCar.brand = editTextBrand.text.toString()

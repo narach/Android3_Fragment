@@ -9,8 +9,11 @@ class CarListViewModel : ViewModel() {
 
     var selectedIndex = MutableLiveData<Int>(0)
 
+    var selectedItem: MutableLiveData<Car> = MutableLiveData()
+
     fun selectCar(index: Int) {
         selectedIndex.value = index
+        this.selectedItem.postValue(carListLiveData.value?.get(index))
     }
 
     fun loadCars(cars: MutableList<Car>) {
